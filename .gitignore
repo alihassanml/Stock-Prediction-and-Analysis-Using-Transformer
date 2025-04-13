@@ -1,4 +1,5 @@
 env
 Documentation.docx
-frontend
-backend
+# frontend
+# backend
+__pycache__

@@ -1,1 +1,8 @@
 pandas
+phidata
+duckduckgo-search
+fastapi
+groq
+yfinance
+python-multipart
+uvicorn
