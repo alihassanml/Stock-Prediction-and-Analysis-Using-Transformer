@@ -35,7 +35,8 @@ finance_agent = Agent(
         stock_fundamentals=True,
         company_news=True
     )],
-    instructions=["Use instructions to display the data"],
+    instructions=["Use instructions to display the data.",
+                 "Financial analyst specialized in breaking news and investment insights."],
     show_tool_calls=True,
     markdown=True,
 )
@@ -44,7 +45,12 @@ finance_agent = Agent(
 multi_AI_Agent = Agent(
     team=[web_Search_agent, finance_agent],
     model=Groq(id='deepseek-r1-distill-llama-70b', api_key=groq_api),
-    instructions=["For news updates, focus on the latest and most relevant information. Provide detailed results."],
+    instructions=[
+    "When searching for news, prioritize the most recent and reliable sources.",
+    "Return structured results with headline, summary, date, and source.",
+    "Ignore outdated or speculative news unless specifically requested.",
+    "When showing stock data, include current price, trend, and latest analyst sentiment."
+    ],
     show_tool_calls=True,
     markdown=True,
 )
@@ -57,4 +63,4 @@ async def ask_agent(query: str = Query(..., description="Query for the multi-age
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
